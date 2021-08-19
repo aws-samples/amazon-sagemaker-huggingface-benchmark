@@ -1,0 +1,1 @@
+{"run_number": 22, "job_name": "experiment-run22-13-12-25-55", "training_time": 3122, "bill_time": 3122, "mean_f1": 0.9479855379429989}

@@ -1,0 +1,1 @@
+{"run_number": 16, "job_name": "experiment-run16-lradj-batchsize16", "training_time": 16264, "bill_time": 16264, "mean_f1": 0.9532093361163274}

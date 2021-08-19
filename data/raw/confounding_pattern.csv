@@ -1,0 +1,6 @@
+﻿Effect Names,Nodes,Nodes*Nodes,Dataset Size,Dataset Size*Dataset Size,Nodes*Dataset Size
+Nodes,1,0.188982237,0,0,0.044823932
+Nodes*Nodes,0.188982237,1,0,0,0.008470927
+Dataset Size,0,0,1,0.06401844,0.132320107
+Dataset Size*Dataset Size,0,0,0.06401844,1,0.008470927
+Nodes*Dataset Size,0.044823932,0.008470927,0.132320107,0.008470927,1

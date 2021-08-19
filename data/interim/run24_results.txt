@@ -1,0 +1,1 @@
+{"run_number": 24, "job_name": "experiment-run18-aug9-noparallel", "training_time": 11076, "bill_time": 11076, "mean_f1": 0.9559750906238658}
