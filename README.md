@@ -1,18 +1,18 @@
-aws-huggingface-benchmarking 🤗
+amazon-sagemaker-huggingface-benchmark 🤗
 ==============================
 
 Project Motivation
 ------------
-In 2021, a new partnership between Amazon Web Services and HuggingFace has resulted in the release of several cutting-edge AWS SageMaker features, towards the aim of helping customers train and deploy natural language models quickly on AWS. This repository is focused on helping customers and data scientists dive deeper into the functionality of three of these new collaborative features for model training: HuggingFace Deep Learning Containers, using the HuggingFace + AWS SageMaker Python SDK to build AutoModels, and making use of AWS SageMaker Data Parallelism to further reduce training time.
+In 2021, a new partnership between Amazon Web Services and HuggingFace has resulted in the release of several cutting-edge Amazon SageMaker features, towards the aim of helping customers train and deploy natural language models quickly on AWS. This repository is focused on helping customers and data scientists dive deeper into the functionality of three of these new collaborative features for model training: HuggingFace Deep Learning Containers, using the HuggingFace + SageMaker Python SDK to build AutoModels, and making use of SageMaker Data Parallelism to further reduce training time.
 
-Customers and data scientists alike are interested in adopting these new features to fine-tune pretrained HuggingFace models on their projects. However, anyone new to working with HuggingFace and AWS Sagemaker shares the same common questions: 
+Customers and data scientists alike are interested in adopting these new features to fine-tune pretrained HuggingFace models on their projects. However, anyone new to working with HuggingFace and Sagemaker shares the same common questions: 
 
 * How much will using distributed data parallelism reduce my model training time?
 * How much will the cost of running training jobs change?
 * How much will model performance change, if at all, by using distributed data paralellism to reduce training time?
 * How do all of these factors change again for different amounts of data used in the fine-tuning process?
 
-The present repository is an experimentation hub to collect data that will answer these questions for customers. By setting up and running experiments that identify the model training time, performance, and training job cost, at different settings for number of GPUs used (vertical and horizonal scaling), and at different dataset sizes (number of samples). All experiments are run using a HuggingFace Deep Learning Container in AWS SageMaker, with the Trainer() API and SageMaker Python SDK. 
+The present repository is an experimentation hub to collect data that will answer these questions for customers. By setting up and running experiments that identify the model training time, performance, and training job cost, at different settings for number of GPUs used (vertical and horizonal scaling), and at different dataset sizes (number of samples). All experiments are run using a HuggingFace Deep Learning Container in SageMaker, with the Trainer() API and SageMaker Python SDK. 
 
 Project Scope
 ------------
@@ -114,7 +114,7 @@ See more about it here: https://huggingface.co/datasets/amazon_polarity
 
 Known Issues/Bugs
 ------------
-During the design of this repo and initial data collection, some data was collected by cloning failed training jobs launched via the SDK as described in get_results Step 7, and adjusting their EBS volumes manually. This was neccessary to work around a bug that prevented custom EBS volume_size values from being passed into AWS SageMaker. The runs executed in the console can be identified by the title of their associated training job (different than standard format in run_experiment.py). However running the jobs in the console vs the SDK does not impact the ultimate results of the training job. If you are designing a custom experiment, and notice your training jobs do not have the correct volume_size passed to them, consequently causing an ArchiveError and job failure, you can work around the issue by cloning the failed job and adjusting the EBS volume manually. The results of any training job you have executed in your account can be looked up manually by passing the name of the training job and run number while executing the last cell in the get_results notebook titled "Manual Results Lookup."
+During the design of this repo and initial data collection, some data was collected by cloning failed training jobs launched via the SDK as described in get_results Step 7, and adjusting their EBS volumes manually. This was neccessary to work around a bug that prevented custom EBS volume_size values from being passed into SageMaker. The runs executed in the console can be identified by the title of their associated training job (different than standard format in run_experiment.py). However running the jobs in the console vs the SDK does not impact the ultimate results of the training job. If you are designing a custom experiment, and notice your training jobs do not have the correct volume_size passed to them, consequently causing an ArchiveError and job failure, you can work around the issue by cloning the failed job and adjusting the EBS volume manually. The results of any training job you have executed in your account can be looked up manually by passing the name of the training job and run number while executing the last cell in the get_results notebook titled "Manual Results Lookup."
 
 
 ## Security

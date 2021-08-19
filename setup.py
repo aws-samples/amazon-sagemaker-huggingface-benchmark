@@ -10,5 +10,5 @@ setup(
     version='0.1.0',
     description='This is a project to demonstrate distributed training and fine tuning of HuggingFace models with Sagemaker',
     author='Samantha Stuart, Professional Services I Intern, Amazon Web Services',
-    license='MIT',
+    license='MIT-0',
 )

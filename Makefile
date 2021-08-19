@@ -6,7 +6,7 @@
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROFILE = default
-PROJECT_NAME = aws-huggingface-benchmarking
+PROJECT_NAME = amazon-sagemaker-huggingface-benchmark
 PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
