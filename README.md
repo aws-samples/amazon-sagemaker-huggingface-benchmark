@@ -53,11 +53,24 @@ The above tables illustrate the default design. As the user of this repo, you ar
 
 How to Use This Repo
 ------------
-<b>1. To explore the results of the existing default experimental design:</b>
+<b>Set up environment:</b>
+* `git clone` repo to desired directory using the Clone URL
+* Open repository in desired IDE (tested with VSCode, SageMaker Notebooks)
+   * Note: in SageMaker Notebooks, existing Conda PyTorch kernels meets majority of installation requirements already
+   * To install any extra required packages, simply uncomment and run the provided cells at the start of each Jupyter notebooks containing `!pip install PACKAGE_NAME`
+* If working in a local IDE such as VSCode, set up environment using makefile commands in Terminal:
+   * `>>make environment`
+   *  activate your virtual environment `>>source activate amazon-sagemaker-huggingface-benchmark`
+   * If you are using VSCode, you may have to restart the IDE before you can select the newly created environment kernel for your Jupyter Notebook (shown below)
+   <p align="center">
+<img src="reports/figures/env_notebook_kernel.png" width=30% height=20%>
+</p>
+
+<b>1. To explore the results of the existing benchmark of distilBERT on SageMaker:</b>
 * Navigate to notebooks/analyze_results.ipynb
 * Explore data in the results table, and customize visualizations as desired
 
-<b>2. To run a new experimental design, follow the below workflow:</b>
+<b>2. To change the experimental design and run new jobs follow the below workflow:</b>
 * Note: you will have to add your custom AWS configuration information in the .env file (role, s3 bucket)
 <p align="left">
 <img src="reports/figures/workflow.png" width=100% height=20%>
