@@ -28,10 +28,6 @@ requirements: test_environment
 experiment: 
 	$(PYTHON_INTERPRETER) src/data/make_experiment.py data/raw data/interim
 
-## Prep data for experiments and upload to S3 according to experimental_design.csv
-prep_data_and_sync_s3: requirements
-	$(PYTHON_INTERPRETER) src/data/make_s3_upload.py data/interim
-
 ## Make processed results dataset out of raw experimental results
 results: 
 	$(PYTHON_INTERPRETER) src/data/make_results.py data/interim data/processed

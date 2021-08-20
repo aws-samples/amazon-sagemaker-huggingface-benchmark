@@ -1,2 +1,2 @@
 run_id,run_id,dataset_name,automodel_name,num_parameters_tuned,s3_bucket,per_device_train_batch_size,learning_rate,epochs,instance_type,num_gpus,global_batch_size,num_steps,hourly_price,volume_size,parallel_enabled,num_nodes,dataset_size,train_time,f1,billable_seconds,cost
-9,9,amazon_polarity,distilbert-base-uncased,66955010,hf-benchmarking-samstu,32,5e-05,5.0,ml.p3.2xlarge,1,32,84375.0,3.825,1024,False,1,600000,,,,
+9,9,amazon_polarity,distilbert-base-uncased,66955010,distilbert-benchmarking,32,5e-05,5.0,ml.p3.2xlarge,1,32,84375.0,3.825,1024,False,1,600000,,,,

@@ -57,14 +57,19 @@ def main(input_filepath, output_filepath):
     # print("\nTraining dataset sample sizes:", num_samples)
     # print("\nRequired epochs for different sample sizes on 1 GPU:", num_epochs)
     s3_bucket = os.getenv("BUCKET_NAME")
+    dataset_name = os.getenv("HF_DATASET")
+    model_name = os.getenv("HF_MODEL")
+    tunable_params = os.getenv("TUNED_PARAMS")
+
     # insert additional columns containing info that the training jobs will require
-    exp_design.insert(loc = 0, column = 'dataset_name', value = 'amazon_polarity')
-    exp_design.insert(loc = 1, column = 'automodel_name', value = 'distilbert-base-uncased')
-    exp_design.insert(loc = 2, column = 'num_parameters_tuned', value = 66955010) # constant for this model
+    exp_design.insert(loc = 0, column = 'dataset_name', value = dataset_name)
+    exp_design.insert(loc = 1, column = 'automodel_name', value = model_name)
+    exp_design.insert(loc = 2, column = 'num_parameters_tuned', value = tunable_params) # constant for this model
     exp_design.insert(loc = 3, column = 's3_bucket', value = s3_bucket) # constant for this model
     exp_design.insert(loc = 4, column = 'per_device_train_batch_size', value = batch_size) # calculated above
     exp_design.insert(loc = 5, column = 'learning_rate', value = 5e-5)
     exp_design.insert(loc = 6, column = 'epochs', value = num_epochs) # calculated above
+
 
     # map the num_nodes column to specific factor levels for experimentation
     instance_mapper = {1:'ml.p3.2xlarge', 2:'ml.p3.16xlarge', 4:'ml.p3.16xlarge'}
@@ -89,16 +94,16 @@ def main(input_filepath, output_filepath):
     # --------------------------------------------------------------------------------------------------------------------
 
     # if any additional data points desired, add additional rows to csv with custom params
-    cp1 = [15,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,5.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,600000]
-    cp2 = [16,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',16,5e-05,5.0,'ml.p3.16xlarge',8,128,10547,28.152,1024,True,1,600000] # pd batch size adjusted for cuda error
-    cp3 = [17,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,30.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,True,1,100000]
-    cp4 = [18,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,3.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,True,1,1000000]
-    cp5 = [19,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,30.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,100000]
-    cp6 = [20,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,3.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,1000000]
-    cp7 = [21,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,2.83e-4,30.0,'ml.p3.16xlarge',32,1024,2637,28.152,30,True,4,100000] # run tmo - sqrt law
-    cp8 = [22,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,2.83e-4,3.0,'ml.p3.16xlarge',32,1024,2637,28.152,30,True,4,1000000] # run tmo - sqrt law
-    cp9 = [23,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,30.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,False,1,100000]
-    cp10 = [24,'amazon_polarity','distilbert-base-uncased',66955010,'hf-benchmarking-samstu',32,5e-05,3.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,False,1,1000000]
+    cp1 = [15,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,5.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,600000]
+    cp2 = [16,dataset_name,model_name,tunable_params,s3_bucket,16,5e-05,5.0,'ml.p3.16xlarge',8,128,10547,28.152,1024,True,1,600000] # pd batch size adjusted for cuda error
+    cp3 = [17,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,30.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,True,1,100000]
+    cp4 = [18,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,3.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,True,1,1000000]
+    cp5 = [19,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,30.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,100000]
+    cp6 = [20,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,3.0,'ml.p3.8xlarge',4,128,21094,14.688,1024,False,1,1000000]
+    cp7 = [21,dataset_name,model_name,tunable_params,s3_bucket,32,2.83e-4,30.0,'ml.p3.16xlarge',32,1024,2637,28.152,30,True,4,100000] 
+    cp8 = [22,dataset_name,model_name,tunable_params,s3_bucket,32,2.83e-4,3.0,'ml.p3.16xlarge',32,1024,2637,28.152,30,True,4,1000000] 
+    cp9 = [23,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,30.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,False,1,100000]
+    cp10 = [24,dataset_name,model_name,tunable_params,s3_bucket,32,5e-05,3.0,'ml.p3.16xlarge',8,256,10547,28.152,1024,False,1,1000000]
 
     # Open our existing CSV file in append mode
     # Create a file object for this file
