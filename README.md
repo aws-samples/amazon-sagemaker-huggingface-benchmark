@@ -91,11 +91,11 @@ The results shown below are from the default experimental design in this reposit
 </p>
 
 ### 2c. How to Explore the distilBERT Benchmarking Results
-To explore the results of the benchmark performed of distilBERT performed in SageMaker:
+To explore the results further yourself:
 1. Navigate to notebooks/analyze_results.ipynb
 2. Explore data in the results table, and customize visualizations as desired
 
-Please review the deep learning parameters used in the default benchmark when interpreting results.
+Please review the deep learning parameters used in the default benchmark when interpreting results. The global batch size used will impact benchmarking results.
 
 ## 3. How to Customize and Re-Use this Repo: 
 This repo is meant to be re-used for custom benchmarking HuggingFace AutoModels with Amazon SageMaker instances and SageMaker data parallelism, in HuggingFace Deep Learning Containers. 
@@ -113,19 +113,19 @@ This repo is meant to be re-used for custom benchmarking HuggingFace AutoModels 
 </p>
 
 ### 3b. Environment Setup, SageMaker Notebooks 
-* `git clone` repo to your SageMaker Notebook (can do on start up, or in notebook terminal)
-* With SageMaker Notebooks/HuggingFace DLCs, the existing Conda PyTorch kernels meet the basic installation requirements already, `conda_pytorch_latest` kernel reccomended
+* `git clone` this repo to your SageMaker Notebook (can do on start-up, or in from the terminal in SageMaker Notebooks)
+* With SageMaker Notebooks & HuggingFace Deep Learning Containers, the existing conda PyTorch kernels meet the basic installation requirements already. `conda_pytorch_latest_p36` kernel reccomended.
 * To install any extra required packages, simply uncomment and run the provided cells at the start of each Jupyter Notebook containing `!pip install PACKAGE_NAME`
 * Customize your environment variables in .env with your AWS information 
-   * Note: you may have to update your SageMaker execution role using the commented code provided in the .env file
+   * Note: if running in SageMaker Notebooks, you may have to update your SageMaker execution role manually in all .py scripts using the commented Python code provided in the .env file. 
 
 ## 4. Getting Started with a Custom Benchmark
 
-By customizing repository files using the process described by Option 1 or Option 2 below, the benchmarking experimental design shown above can be changed. The design is changed via Option 1 or 2 by means of updating the file: `data/interim/experimental_design.csv` programmatically.
+The benchmarking experimental design can be changed by customizing repository files, using the process described by Option 1 (Notebooks) or Option 2 (Makefile) below. The design is changed via Option 1 or 2 by means of updating the file `data/interim/experimental_design.csv` programmatically.
 
-Other HuggingFace AutoModels may be loaded for benchmarking by changing the environment variable `HF_MODEL`. An alternative dataset from the HuggingFace Hub may also be automatically loaded to this repo by changing the environment variable `HF_DATASET`. However, if changing the dataset, you will have to also adjust: `wrangle_datasets.py` which is used to load data, preprocess/tokenize it, and upload it to S3. Additionally, if you are changing the modelling task, be sure to update the SageMaker training script in `src/models/train_model.py`. All imports of src in Jupyter Notebooks are done by default in this repository using relative module imports, rather than package installs with `pip install -e`.
+Other HuggingFace AutoModels may be loaded for benchmarking by changing the environment variable `HF_MODEL`. An alternative dataset from the HuggingFace Hub may also be automatically loaded to this repo by changing the environment variable `HF_DATASET`. However, if changing the dataset, you will have to also adjust `wrangle_datasets.py` which is used to load data, preprocess/tokenize it, and upload it to S3. Additionally, if you are changing the modelling task, be sure to update the SageMaker training script in `src/models/train_model.py`. All imports of src in Jupyter Notebooks are done in this repository using relative module imports so things work out of the box, rather than requiring package installs with `pip install -e`, however you may change this if desired.
 
-When getting started with customization, exploring the process using the provided Jupyter Notebooks (Option 1) is reccomended. After you are comfortable with the format for your benchmarking experiment, faster iteration is enabled using the Makefile commands described in Option 2.
+When getting started with customization, exploring the process using the provided Jupyter Notebooks (Option 1) is reccomended. After you are comfortable with the format for your benchmarking experiment, faster iteration can be done using the Makefile commands described in Option 2.
 
 ### 4a. Getting Started Option 1: Notebooks (reccomended to start)
 
