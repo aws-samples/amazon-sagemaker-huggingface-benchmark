@@ -3,16 +3,17 @@ amazon-sagemaker-huggingface-benchmark 🤗
 
 Project Motivation
 ------------
-In 2021, a new partnership between Amazon Web Services and HuggingFace has resulted in the release of several cutting-edge Amazon SageMaker features, towards the aim of helping customers train and deploy natural language models quickly on AWS. This repository is focused on helping customers and data scientists dive deeper into the functionality of three of these new collaborative features for model training: HuggingFace Deep Learning Containers, using the HuggingFace + SageMaker Python SDK to build AutoModels, and making use of SageMaker Data Parallelism to further reduce training time.
+In 2021, a series of machine learning features were released on AWS to help customers fine-tune and deploy pretrained natural language models quickly with HuggingFace. Hugging Face Deep Learning Containers (DLCs), the HuggingFace framework in the SageMaker Python SDK, and built-in compatibility with SageMaker data parallelism together reduce undifferentiated heavy lifting for customers interested in fine-tuning pretrained HuggingFace models to meet their business objectives. 
 
-Customers and data scientists alike are interested in adopting these new features to fine-tune pretrained HuggingFace models on their projects. However, anyone new to working with HuggingFace and Sagemaker shares the same common questions: 
+Some important factors for customers to plan for at the outset of a HuggingFace project are the downstream impacts of model size. HuggingFace pretrained models range from having multi-millions to billions of model parameters to fine-tune on customer datasets. Selecting a right-sized compute instance for the job of fine-tuning a pretrained model can reduce training times on such large models from days to minutes with AWS SageMaker.
 
-* How much will using distributed data parallelism reduce my model training time?
-* How much will the cost of running training jobs change?
-* How much will model performance change, if at all, by using distributed data paralellism to reduce training time?
-* How do all of these factors change again for different amounts of data used in the fine-tuning process?
+However, anyone who is new to working with HuggingFace and AWS Sagemaker shares the same common questions:
+*	How much will SageMaker distributed data parallelism reduce my model training time?
+*	How will the cost of running training jobs change?
+*	How will model performance change, if at all, by using distributed data parallelism to reduce training time?
+*	How do all of these factors change again for different amounts of sample data used in the fine-tuning process?
 
-The present repository is an experimentation hub to collect data that will answer these questions for customers. By setting up and running experiments that identify the model training time, performance, and training job cost, at different settings for number of GPUs used (vertical and horizonal scaling), and at different dataset sizes (number of samples). All experiments are run using a HuggingFace Deep Learning Container in SageMaker, with the Trainer() API and SageMaker Python SDK. 
+We have performed a benchmarking study to help customers and data scientists dive deeper into these trade-offs between training time, model performance, and cost when fine-tuning HuggingFace models on AWS SageMaker with distributed training. The results from this study will help customers and data scientists build intuition around points of diminishing returns when selecting compute resources to allocate for their machine learning projects with HuggingFace and AWS SageMaker. 
 
 Project Scope
 ------------
@@ -25,7 +26,7 @@ The scope of the experiment performed in this repo is as follows.
 
 <b>Experiment Runs in Detail:</b>
 <p align="left">
-<img src="reports/figures/experiment_runs_detailed.png" width=60% height=100%>
+<img src="reports/figures/experiment_runs_detailed.png" width=100% height=100%>
 </p>
 
 <b>Overview of Parameters Used:</b>
@@ -124,6 +125,22 @@ The dataset used in this experiment is the "Amazon Polarity" dataset from the Hu
 for binary text classification. The task predicts a positive or negative rating given text from an Amazon review.
 
 See more about it here: https://huggingface.co/datasets/amazon_polarity 
+
+Benchmarking Results
+------------
+The results shown below are from the default experimental design in this repository for a pretrained distilbert-base-uncased AutoModel from the HuggingFace transformers library.
+
+<p align="left">
+<img src="reports/figures/readme_time_cost_results.png" width=100% height=100%>
+</p>
+
+<p align="left">
+<img src="reports/figures/readme_performance_results.png" width=100% height=100%>
+</p>
+
+<p align="left">
+<img src="reports/figures/readme_performance_remediation.png" width=100% height=100%>
+</p>
 
 Known Issues/Bugs
 ------------
