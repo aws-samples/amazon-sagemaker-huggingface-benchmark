@@ -72,11 +72,12 @@ The scope of the distilBERT benchmarking performed in this repo is shown below. 
    * Learning Rate: 5e-5 (unless otherwise specified)
    * Number of Steps (for a given global batch size, to allow comparing training jobs with different numbers of samples)
 
-<b>Dataset Credit</b>
+<b>Dataset Credit:</b>
+
 The dataset used in this experiment is the "Amazon Polarity" dataset from the HuggingFace Hub, used 
 for binary text classification. The task predicts a positive or negative rating given text from an Amazon review.
 
-See more about it here: https://huggingface.co/datasets/amazon_polarity 
+See more about the Amazon Polarity dataset here: https://huggingface.co/datasets/amazon_polarity 
 
 ### 2b. distilBERT Benchmarking Results
 The results shown below are from the default experimental design in this repository for a pretrained distilbert-base-uncased AutoModel from the HuggingFace transformers library.
