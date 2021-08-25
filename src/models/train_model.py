@@ -74,17 +74,14 @@ if __name__ == "__main__":
             accuracy: float
                 average accuracy across classes
             
-            f1_score: ndarray of shape (1, n_classes)
-                f1 score per class
-                
-            mean_f1_score: float
-                average f1 score across all classes (flattens f1 score to 1 metric for multi-class)
+            f1_score: float
+                f1 score, macro weighted
             
-            precision: ndarray of shape (1, n_classes)
-                precision per class
+            precision: float
+                precision, macro weighted
             
-            recall: ndarray of shape (1, n_classes)
-                recall per class
+            recall: float
+                recall, macro weighted
             
             cls_rep: string / dict
                 text summary of the classification metrics 
@@ -96,7 +93,6 @@ if __name__ == "__main__":
         labels = raw_preds.label_ids 
         smooth_preds = raw_preds.predictions.argmax(-1) 
         precision, recall, f1, _ = precision_recall_fscore_support(labels, smooth_preds, average='macro')
-        mean_f1 = np.mean(f1) # for use in multi-class hyperparameter tuning
         acc = accuracy_score(labels, smooth_preds)
         conf_mat = confusion_matrix(labels, smooth_preds)
         cls_rep = classification_report(labels, smooth_preds)
