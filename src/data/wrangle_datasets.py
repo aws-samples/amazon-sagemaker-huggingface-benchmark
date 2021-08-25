@@ -34,12 +34,10 @@ dataset_name = exp_design['dataset_name'].unique()[0] # should only have one dat
 iam_client = boto3.client('iam')
 role_name = os.getenv("AWS_ROLE")
 role = iam_client.get_role(RoleName=role_name)['Role']['Arn']
-
-# if in SageMaker Notebooks, comment out role_name and role above and replace with below:
-# role = get_execution_role()
-
 sess = sagemaker.Session(default_bucket=f"{bucket}")
 metrics_session = sagemaker.session.Session() # use to get metrics after training
+# if in SageMaker Notebooks, comment out role_name and role above and replace with below:
+# role = get_execution_role()
 
 # assign region for the session
 region = boto3.Session().region_name
