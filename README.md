@@ -16,7 +16,6 @@ Table of Contents
   * [4b. Getting Started Option 2 : Makefile Commands (reccomended for iterating fast)](#4b-getting-started-option-2---makefile-commands--reccomended-for-iterating-fast-)
 - [5. Project Organization](#5-project-organization)
 - [6. Known Issues/Bugs](#6-known-issues-bugs)
-  * [EBS Volume Size (ArchiveError)](#ebs-volume-size--archiveerror-)
 - [7. Security](#7-security)
 - [8. License](#8-license)
 
@@ -114,12 +113,16 @@ This repo is meant to be re-used for custom benchmarking HuggingFace AutoModels 
 <img src="reports/figures/env_notebook_kernel.png" width=60% height=20%>
 </p>
 
-### 3b. Environment Setup, SageMaker Notebooks 
+### 3b. Environment Setup, SageMaker Notebooks (limited use for executing training jobs)
+SageMaker notebooks are only supported with this repo to allow running the get_results notebook such that parallel training jobs can be launched. All other functionality is only available locally.
 * `git clone` this repo to your SageMaker Notebook (can do on start-up, or in from the terminal in SageMaker Notebooks)
-* With SageMaker Notebooks & HuggingFace Deep Learning Containers, the existing conda PyTorch kernels meet the basic installation requirements already. `conda_pytorch_latest_p36` kernel reccomended.
-* To install any extra required packages, simply uncomment and run the provided cells at the start of each Jupyter Notebook containing `!pip install PACKAGE_NAME`
-* Customize your environment variables in .env with your AWS information 
-   * Note: if running in SageMaker Notebooks, you may have to update your SageMaker execution role manually in all .py scripts using the commented Python code provided in the .env file. 
+* With SageMaker Notebooks the existing Conda PyTorch kernels meet the basic installation requirements already. `conda_pytorch_latest_p36` kernel reccomended.
+* Customize your environment variables in .env with your information (note - file will be hidden, use cat .env to read it and vim or nano to edit it) 
+* To install any extra required packages in the get_results notebook, simply uncomment and run the provided cells at the start of each Jupyter Notebook containing `!pip install PACKAGE_NAME`
+* Update the SageMaker execution role in `run_experiment.py` by uncommenting lines indicated (should set role = get_execution_role())
+* Update the SageMaker execution role in `wrangle_datasets.py` by uncommenting lines indicated (should set role = get_execution_role())
+* After following these instructions, you will be able to execute the get_results notebook to generate and launch SageMaker training jobs according to your experimental design. This functionality is useful for parallelizing executing training jobs in a new benchmarking experiment.
+* Back on your local machine, pull in the results from the jobs executed in the SageMaker notebook by filling in and using the cell at the end of the get_results notebook (Manual Results Lookup). It will populate the results file from the training job you launched in the SageMaker notebook locally.
 
 ## 4. Getting Started with a Custom Benchmark
 

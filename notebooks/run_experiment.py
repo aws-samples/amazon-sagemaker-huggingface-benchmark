@@ -57,6 +57,10 @@ def run_experiment(exp_design_path = '../data/interim/test_4_node_experimental_d
     iam_client = boto3.client('iam')
     role_name = os.getenv("AWS_ROLE")
     role = iam_client.get_role(RoleName=role_name)['Role']['Arn']
+
+    # if in SageMaker Notebooks, comment out role_name and role above and replace with below:
+    # role = get_execution_role()
+
     sess = sagemaker.Session(default_bucket=f"{bucket}")
     metrics_session = sagemaker.session.Session() # use to get metrics after training
 
