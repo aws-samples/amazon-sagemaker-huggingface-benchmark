@@ -34,6 +34,7 @@ However, anyone who is new to working with HuggingFace and AWS Sagemaker shares 
 
 We have performed a benchmarking study to help customers and data scientists dive deeper into these trade-offs between training time, model performance, and cost when fine-tuning HuggingFace models on AWS SageMaker with distributed training. The results from this study will help customers and data scientists build intuition around points of diminishing returns when selecting compute resources to allocate for their machine learning projects with HuggingFace and AWS SageMaker. 
 
+<b>A technical report summarizing the results of the distilBERT benchmarking can be found in </b>`reports`. All figures and experiments were executed using this repository.
 
 
 ## 2. distilBERT Benchmarking Project
