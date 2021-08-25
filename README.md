@@ -106,8 +106,9 @@ This repo is meant to be re-used for custom benchmarking HuggingFace AutoModels 
 * Open repository root directory in desired IDE (tested with VSCode)
 * Customize your environment variables in .env with your AWS information 
 * Set up your development environment using Makefile commands from the terminal in the root directory of this repo:
-   * `>> make environment`
+   * `>> make create_environment`
    *  activate your virtual environment `>>source activate amazon-sagemaker-huggingface-benchmark`
+   * install package dependencies with `>> make requirements`
    * If you are using VSCode, you may have to restart the IDE before you can select the newly created environment kernel to run your Jupyter Notebooks (shown below)
    <p align="center">
 <img src="reports/figures/env_notebook_kernel.png" width=60% height=20%>
@@ -181,6 +182,11 @@ When getting started with customization, exploring the process using the provide
 
 
 ## 6. Known Issues/Bugs
+
+### The `make experiment` Makefile command 
+
+If the `make experiment` command is not reading in environment variables on first execution from your IDE terminal, you may have to close and restart your IDE. You can check if this is happening by reviewing the files in the data/interim folder, and seeing if they are missing values that should be read from the environment variables. (dataset name, huggingface model name). To resolve this, save the repo, close your IDE, reopen the repo, and run "make experiment" again.
+
 
 ### EBS Volume Size (ArchiveError)
 During the design of this repo and initial data collection, some data was collected by cloning failed training jobs launched via the SDK as described in get_results Step 7, and adjusting their EBS volumes manually. This was neccessary to work around a bug that prevented custom EBS volume_size values from being passed into SageMaker. The runs executed in the console can be identified by the title of their associated training job (different than standard format in run_experiment.py). 
