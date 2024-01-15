@@ -11,7 +11,7 @@ numpy==1.22.0
 matplotlib==3.4.2
 pandas==1.2.4
 seaborn==0.11.2
-scipy==1.7.1
+scipy==1.10.0
 datasets==1.6.2
 dash==1.21.0
 dash-core-components==1.17.1
